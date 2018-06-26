@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script src="/static/js/jquery-3.3.1.min.js"></script>
+
+<link rel="stylesheet" th:href="@{static/css/honeySwitch.css}" />
+<style>
+    body{
+
+    }
+    .line {
+        display: inline-block;
+        height: 50%;
+        width: 1px;
+        background: #cccccc;
+        margin-bottom: 4%;
+    }
+    #top{
+        background-color: #ffffff;
+        width: 100%;
+        position: absolute;
+    }
+    #search{
+        width: 72%;
+        border: solid 2px #cccccc;
+        height: 8%;
+        float: left;
+        margin-left: 5%;
+        margin-top: 3%;
+        border-radius: 10px;
+        box-shadow: 2px 2px 2px 2px #888888;
+    }
+    #search_img{
+        height: 35%;
+        margin: 6% 3% 6% 6%;
+    }
+    #search_input{
+        margin-left: 2%;
+        border: none;
+        text-align: center;
+        margin-top: 3%;
+        font-size: 45px;
+        font-family: "Microsoft YaHei";
+        position: fixed;
+
+    }
+
+    #admin_add{
+        border: solid 2px #cccccc;
+        box-shadow: 2px 2px 2px 2px #888888;
+        width: 13%;
+        height: 78%;
+        margin-left: 80%;
+        margin-top: 3%;
+        border-radius: 10px;
+        position: absolute;
+    }
+    #admin_img{
+        height: 50%;
+        margin: 25%;
+    }
+    .user{
+
+        width: 100%;
+        height: 50%;
+    }
+    .user_top{
+        background-color: #0099FF;
+        height: 12%;
+    }
+    .user_content{
+        font-size: 35px;
+    }
+    .name_span{
+        font-family: "Microsoft YaHei";
+        font-size: 38px;
+        color: #ffffff;
+        margin-left: 10%;
+        line-height: 280%;
+    }
+    .job_span{
+        font-family: "Microsoft YaHei";
+        font-size: 30px;
+        color: #ffffff;
+        margin-left: 3%;
+    }
+    .admin_ico{
+        width: 7%;
+        margin-left: 10%;
+        margin-top: 2%;
+        margin-right: 4%;
+    }
+    .area_ico{
+        width: 7%;
+        margin-left: 40%;
+        margin-right: 10%;
+    }
+    .password_ico{
+        width: 7%;
+        margin: 2% 4% 2% 10%;
+    }
+    .phone_ico{
+        width: 7%;
+        margin: 2% 4% 2% 40%;
+    }
+    .admin_span{
+        position: absolute;
+        margin-top: 3%;
+    }
+    .area_span{
+        position: absolute;
+        margin-top: 3%;
+        margin-left: -5%;
+    }
+    .password_span{
+        position: absolute;
+        margin-top: 3%;
+    }
+    .phone_span{
+        position: absolute;
+        margin-top: 3%;
+        margin-left: 2%;
+    }
+    .user_bottom{
+        background: #CCCCCC;
+        width: 100%;
+        height: 20px;
+    }
+    #editor_backgroud{
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.6);
+        position: fixed;
+        border-radius: 10px;
+    }
+    #editor{
+        width: 60%;
+        height: 800px;
+        margin-top: 45%;
+        margin-left: 20%;
+    }
+    #editor_top{
+        width: 100%;
+        height: 14%;
+        background-color: rgba(0,154,255,1);
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+
+    }
+    #editor_content{
+        width: 100%;
+        height: 81%;
+        background-color: rgba(255,255,255,1);
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+    }
+    .button-sub {
+        border: solid 1px;
+        font-size: 40px;
+        margin: 5% 0% 0% 39%;
+        width: 25%;
+        background-color: #0099ff;
+        color: #ffffff;
+        border-radius: 10px;
+        text-align: center;
+        height: 16%;
+        line-height: 90px;
+    }
+    .info_span{
+        font-size: 40px;
+        line-height: 250%;
+        margin-left: 10%;
+    }
+    .info_span input{
+        font-size: 30px;
+        width: 50%;
+        float: right;
+        margin-top: 5%;
+        text-align: center;
+        margin-right: 5%;
+        border: 0px solid;
+        border-bottom-width: 1px;
+    }
+    .select{
+        font-size: 38px;
+        font-family: "Microsoft YaHei";
+        float: right;
+        margin-right: 20px;
+        text-align: right;
+        border: 0px;
+        margin-top: 5%;
+        font-size: 35px;
+    }
+    .select option{
+        font-size: 15px;
+    }
+
+
+
+    #new_editor_backgroud{
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.6);
+        position: fixed;
+        border-radius: 10px;
+    }
+    #new_editor{
+        width: 60%;
+        height: 800px;
+        margin-top: 45%;
+        margin-left: 20%;
+        position: fixed;
+    }
+    #new_editor_top{
+        width: 100%;
+        height: 14%;
+        background-color: rgba(0,154,255,1);
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+
+    }
+    #new_editor_content{
+        width: 100%;
+        height: 81%;
+        background-color: rgba(255,255,255,1);
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+    }
+
+    .pup{
+        display: none;
+        width: 75%;
+        height: 4%;
+        position: fixed;
+        top: 90%;
+        left: 12.5%;
+        z-index: 5000;
+        color: #ffffff;
+        text-align: center;
+        line-height: 5%;
+        font-family: "Microsoft YaHei";
+        font-size: 38px;
+        border-radius: 10px;
+    }
+    #user{
+        position: absolute;
+        margin-top: 20%;
+        width: 100%;
+    }
+</style>
+<script>
+    $(function () {
+
+        $.ajax({
+            url: "/selectUser",
+            async:false,
+            success: function(data){
+
+                if(data.code=="SUCCESS"){
+                    userappend(data)
+                }
+            }
+        });
+    });
+
+    function select_user() {
+        $.ajax({
+            url: "/selectUser",
+            data:{
+                selectStr:$("#search_input").val()
+            },
+            success: function(data){
+                if(data.code=="SUCCESS"){
+                    $("#user").empty();
+                    userappend(data);
+
+                    $.ajax({
+                        type: "GET",
+                        url: "/static/js/honeySwitch.js",
+                        async:false,
+                        dataType: "script"
+                    });
+                }
+
+            }
+        });
+    }
+
+    function userappend(data) {
+        for(let i=0;i<data.data.length;i++){
+            if(data.data[i].delFlag==0){
+                var delFlag = "switch-off"
+            }else {
+                var delFlag = "switch-on"
+            }
+            if(data.data[i].userarea==0){
+                var userarea = "全部"
+            }else if(data.data[i].userarea==1){
+                var userarea = "科技新城"
+            }else if(data.data[i].userarea==2){
+                var userarea = "通航小镇"
+            }else if(data.data[i].userarea==3){
+                var userarea = "高新区"
+            }
+
+
+            $("#user").append(
+                " <div class='user' onclick='updateup(this)'>"+
+                "        <div class='user_top'>" +
+                "            <span class='name_span'>"+data.data[i].nickname+"</span><span class='job_span'>"+data.data[i].postive+"</span><span id='"+data.data[i].username+"' class='"+delFlag+"' style='float:right;margin-top:3%;margin-right:8%;zoom: 1.5;'></span>" +
+                "        </div>" +
+                "        <div class='user_content'>" +
+                "            <img id='admin_ico' class='admin_ico' src='/static/img/icon_admin.png'>" +
+                "            <span class='admin_span'>"+data.data[i].username+"</span>" +
+                "            <img id=\"area_ico\"class=\"area_ico\" src=\"/static/img/icon_area.png\">" +
+                "            <span class='area_span'>"+userarea+"</span>" +
+                "            <img id=\"password_ico\"class=\"password_ico\" src=\"/static/img/icon_password.png\">" +
+                "            <span class=\"password_span\">******</span>" +
+                "            <img id=\"phone_ico\" class=\"phone_ico\"src=\"/static/img/icon_phone.png\">" +
+                "            <span class=\"phone_span\">"+data.data[i].usertell+"</span>" +
+                "        </div>" +
+                "        <div class=\"user_bottom\"></div>" +
+                "    </div>"
+            );
+
+
+        }
+    }
+    function updateclose() {
+        $("#editor_backgroud").hide();
+    }
+    function updateup(data) {
+        $('#editor_name').val(data.getElementsByClassName("name_span")[0].innerHTML);
+        $('#editor_username').val(data.getElementsByClassName("admin_span")[0].innerHTML);
+        $('#editor_password').val(data.getElementsByClassName("password_span")[0].innerHTML);
+        $('#editor_tel').val(data.getElementsByClassName("phone_span")[0].innerHTML);
+        var area = data.getElementsByClassName("area_span")[0].innerHTML
+        if(area=="全部"){
+            $('#editor_belongarea')[0].options[0].selected = true
+        }else if(area=="科技新城"){
+            $('#editor_belongarea')[0].options[1].selected = true
+        }else if(area=="通航小镇"){
+            $('#editor_belongarea')[0].options[2].selected = true
+        }else if(area=="高新区"){
+           $('#editor_belongarea')[0].options[3].selected = true
+        }
+        $("#editor_backgroud").show();
+    }
+
+    function newclose() {
+        $("#new_editor_backgroud").hide();
+    }
+    function newup() {
+        $("#new_editor_backgroud").show();
+    }
+    
+    function insertAdmin() {
+
+        $.ajax({
+            url: "/insertUser",
+            data:{
+                username:$("#new_editor_username").val(),
+                password:$("#new_editor_password").val(),
+                nickname:$("#new_editor_name").val(),
+                usertell:$("#new_editor_tel").val(),
+                userarea:$("#new_editor_belongarea option:selected").val(),
+            },
+            success: function(data){
+                if(data.code=="SUCCESS"){
+                    location.reload();
+                }else{
+                    $("#pup").css("backgroundColor","#B22222");
+                    $("#pup p").empty();
+                    $("#pup p").append("提交失败！"+data.message);
+                    $ ('.pup').show ().delay (3000).fadeOut ();
+                }
+
+            }
+        });
+    }
+    
+    function updateAdmin() {
+        $.ajax({
+            url: "/updateUser",
+            data:{
+                username:$("#editor_username").val(),
+                password:$("#editor_password").val(),
+                nickname:$("#editor_name").val(),
+                usertell:$("#editor_tel").val(),
+                userarea:$("#editor_belongarea option:selected").val(),
+            },
+            success: function(data){
+                if(data.code=="SUCCESS"){
+                    location.reload();
+                }else{
+                    $("#pup").css("backgroundColor","#B22222");
+                    $("#pup p").empty();
+                    $("#pup p").append("提交失败！"+data.message);
+                    $ ('.pup').show ().delay (3000).fadeOut ();
+                }
+
+            }
+        });
+    }
+    
+</script>
+<body>
+    <div id="top">
+        <div id="search">
+            <img id="search_img" src="/static/img/icon_search.png">
+            <span class="line"></span>
+            <input id="search_input" type="text" oninput="select_user()">
+
+        </div>
+        <div id="admin_add" onclick="newup()">
+            <img id="admin_img" src="/static/img/icon_add.png">
+        </div>
+    </div>
+    <div id="user" ></div>
+    <div id="editor_backgroud" style="display: none">
+        <div id="editor">
+            <div id="editor_top">
+                <span style="font-size: 38px;margin-left: 40%;line-height: 300%; color: #ffffff">信息修改<img src="/static/img/window_icon_close.png" style="width: 5%;margin-left: 25%;" onclick="updateclose()"></span>
+            </div>
+            <div id="editor_content">
+                <div class="info_span"><span>用户名</span><input id="editor_username" style="border-bottom-width: 0px;" type="text" readonly="readonly"></div>
+                <div class="info_span"><span>姓名</span><input id="editor_name" type="text"></div>
+                <div class="info_span"><span>密码</span><input id="editor_password" type="text"></div>
+                <div class="info_span"><span>联系电话</span><input id="editor_tel" type="text"></div>
+                <div class="info_span">
+                    <span>所属区域</span>
+                    <select id="editor_belongarea" class="select" >
+                        <option selected='selected'value="0">全部</option>
+                        <option value="1">科技新城</option>
+                        <option value="2">通航小镇</option>
+                        <option value="3">高新区</option>
+                    </select>
+                </div>
+                <div class="button-sub" onclick="updateAdmin()">
+                    完成
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="new_editor_backgroud" style="display: none">
+        <div id="new_editor">
+            <div id="new_editor_top">
+                <span style="font-size: 38px;margin-left: 40%;line-height: 300%; color: #ffffff">新增用户<img src="/static/img/window_icon_close.png" style="width: 5%;margin-left: 25%;" onclick="newclose()"></span>
+            </div>
+            <div id="new_editor_content">
+                <div class="info_span"><span>用户名</span><input id="new_editor_username" type="text"></div>
+                <div class="info_span"><span>姓名</span><input id="new_editor_name" type="text"></div>
+                <div class="info_span"><span>密码</span><input id="new_editor_password" type="text"></div>
+                <div class="info_span"><span>联系电话</span><input id="new_editor_tel" type="text"></div>
+                <div class="info_span">
+                    <span>所属区域</span>
+                    <select id="new_editor_belongarea" class="select" >
+                        <option selected='selected'value="0">全部</option>
+                        <option value="1">科技新城</option>
+                        <option value="2">通航小镇</option>
+                        <option value="3">高新区</option>
+                    </select>
+                </div>
+                <div class="button-sub" onclick="insertAdmin()">
+                    完成
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="pup" id="pup">
+        <p>提示信息</p>
+    </div>
+</body>
+<script src="/static/js/honeySwitch.js"></script>
+</html>

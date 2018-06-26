@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>项目汇总列表</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" type="text/css" href="css/list.css" />
+		<style>
+			.mui-table h4,
+			.mui-table h5,
+			.mui-table .mui-h5,
+			.mui-table .mui-h6,
+			.mui-table p {
+				margin-top: 0;
+			}
+			
+			.mui-table h4 {
+				line-height: 21px;
+				font-weight: 500;
+			}
+			
+			.mui-table .oa-icon {
+				position: absolute;
+				right: 0;
+				bottom: 0;
+			}
+			
+			.mui-table .oa-icon-star-filled {
+				color: #f14e41;
+			}
+			
+			::-webkit-input-placeholder {
+				/* WebKit, Blink, Edge */
+				color: #CCCCCC;
+			}
+			
+			:-moz-placeholder {
+				/* Mozilla Firefox 4 to 18 */
+				color: #CCCCCC;
+				opacity: 1;
+			}
+			
+			::-moz-placeholder {
+				/* Mozilla Firefox 19+ */
+				color: #CCCCCC;
+				opacity: 1;
+			}
+			
+			:-ms-input-placeholder {
+				/* Internet Explorer 10-11 */
+				color: #CCCCCC;
+			}
+			
+			.table-view-li-kaigong {
+				position: relative;
+				padding-top: 18px;
+				padding-bottom: 18px;
+				background-image: url(/static/img/statusImg/kaigong.png);
+				background-size: 40px auto;
+				background-repeat: no-repeat;
+				background-position: top right;
+				background-origin: border-box;
+			}
+			
+			.table-view-li-qianyue {
+				position: relative;
+				padding-top: 18px;
+				padding-bottom: 18px;
+				background-image: url(/static/img/statusImg/qianyue.png);
+				background-size: 40px auto;
+				background-repeat: no-repeat;
+				background-position: top right;
+				background-origin: border-box;
+			}
+			
+			.table-view-li-qiatan {
+				position: relative;
+				padding-top: 18px;
+				padding-bottom: 18px;
+				background-image: url(/static/img/statusImg/qiatan.png);
+				background-size: 40px auto;
+				background-repeat: no-repeat;
+				background-position: top right;
+				background-origin: border-box;
+			}
+			
+			.table-view-li-shouwei {
+				position: relative;
+				padding-top: 18px;
+				padding-bottom: 18px;
+				background-image: url(/static/img/statusImg/shouwei.png);
+				background-size: 40px auto;
+				background-repeat: no-repeat;
+				background-position: top right;
+				background-origin: border-box;
+			}
+			
+			.table-view-li-touchang {
+				position: relative;
+				padding-top: 18px;
+				padding-bottom: 18px;
+				background-image: url(/static/img/statusImg/touchang.png);
+				background-size: 40px auto;
+				background-repeat: no-repeat;
+				background-position: top right;
+				background-origin: border-box;
+			}
+			
+			.table-view-li-list:after {
+				position: absolute;
+				right: 0px;
+				bottom: 0;
+				left: 0px;
+				height: 5px;
+				content: '';
+				-webkit-transform: scaleY(.5);
+				transform: scaleY(.5);
+				background-color: #c8c7cc;
+				z-index: 1;
+			}
+			
+			.table-view-li-div {
+				display: flex;
+				flex-wrap: wrap;
+				font-size: 14px;
+				font-family: "微软雅黑 ";
+				color: #333333;
+			}
+			
+			.table-view-li-div-div1 {
+				width: 50%;
+				margin-bottom: 10px;
+				padding-left: 14px;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				/*文字溢出的部分隐藏并用省略号代替*/
+				white-space: nowrap;
+				/*文本不自动换行*/
+			}
+			
+			.table-view-li-div-div2 {
+				width: 50%;
+				padding-left: 14px;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				/*文字溢出的部分隐藏并用省略号代替*/
+				white-space: nowrap;
+				/*文本不自动换行*/
+			}
+			
+			.dropdown {
+				position: relative;
+				display: inline-block;
+				/*display: flex;*/
+				/*flex-wrap: wrap;*/
+				width: 30%;
+				margin-left: auto;
+				margin-right: auto;
+			}
+			
+			.dropdown-content {
+				display: none;
+				position: absolute;
+				background-color: #f9f9f9;
+				/*width: 375px;*/
+				z-index: 101;
+				min-width: 160px;
+				box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+				padding: 12px 16px;
+			}
+			
+			.dropdown-content li {
+				list-style-type: none;
+				height: 40px;
+				text-align: center;
+				display: inline;
+			}
+			
+			.dropdown-content-after:after {
+				position: absolute;
+				right: 0px;
+				bottom: 0;
+				left: 0px;
+				height: 5px;
+				content: '';
+				-webkit-transform: scaleY(.5);
+				transform: scaleY(.5);
+				background-color: #c8c7cc;
+			}
+			
+			.dropdown:hover .dropdown-content {
+				display: block;
+			}
+			
+			.line {
+				display: inline-block;
+				height: 1px;
+				width: 100%;
+				background: #cccccc;
+				overflow: hidden;
+				vertical-align: middle;
+			}
+		</style>
+	</head>
+
+	<body style="background-color:#ffffff;">
+		<script type="text/javascript" src="/static/js/plug-in/jq/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="/static/js/list.js"></script>
+		<script type="text/javascript" src="/static/js/common.js"></script>
+		<!--标准mui.css-->
+		<link rel="stylesheet" href="/static/css/mui.min.css">
+		<!--App自定义的css-->
+		<!--<link rel="stylesheet" type="text/css" href="css/app.css" />-->
+		<!--<header class="mui-bar mui-bar-nav">
+		    <!--<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+		    <h1 class="mui-title">三行列表</h1>
+		</header>-->
+		<!--<header>-->
+		<div >
+			<!-- tou  kaishi -->
+			<div style="
+					width:100%;display:flex;
+					justify-content:center;padding-top: 8px;
+					">
+				<div style="width:83%;padding-left: 2px;">
+					<div style="
+							width: calc(100% - 10px);
+							height: 49px;
+							background-color:#ffffff;
+							-moz-background-size: 100% 100%;
+							/*height:60px;width:60px;*/
+							/*border:2px solid;*/
+							border-radius:4px;
+							-moz-box-shadow: 0px 0px 5px rgba(0,0,0,0.2);
+							box-shadow: 0px 0px 5px rgba(0,0,0,0.2);
+						    display: flex;
+						   	/* float:right;*/
+						   	/*justify-content: center;*/
+						    align-items: center;
+							">
+						<div style="padding-left: 13px;padding-right: 18px;" class="search_img">
+							<img style="height: 18px;width: 17px;" src="/static/img/list/icon_search.png" />
+						</div>
+						<div>
+							<img style="height: 20px;width: 2px;" src="/static/img/list/title_line.png" />
+						</div>
+						<div class="input_text" style="
+									padding-left: 18px;width: calc(100% - 85px);;
+									display: flex;
+						   			justify-content: center;">
+							<input type="text" name="" id="selectInput" placeholder="请输入关键字" value="" style="
+										margin-bottom: 0px;
+										padding: 0px 0px; 
+										background:none;
+										border: none;
+										font-size: 14px;
+										font-family: '微软雅黑 ';
+										color: #333333;" />
+						</div>
+						<div class="map_img" style="width: 18px;padding-right:13px;float:right;">
+							<img style="height: 18px;width: auto;" src="/static/img/list/icon_map.png" />
+						</div>
+					</div>
+				</div>
+				<!--新项目追加-->
+				<div id="addprogect" style="width: auto">
+					<div id="" style="
+							
+							height:49px;width:49px;
+							/*border:2px solid;*/
+							border-radius:4px;
+							background-color:#ffffff;
+							-moz-box-shadow: 0px 0px 5px rgba(0,0,0,0.2);
+							box-shadow: 0px 0px 5px rgba(0,0,0,0.2);
+						    display: flex;
+						    justify-content: center;
+						    align-items: center;
+							">
+						<img style="width: 20px;height: 20px;" src="/static/img/list/icon_add.png" />
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--</header>-->
+		<div id="leixing" style="width: 100%;padding-top: 8px;
+				display: flex;
+				flex-wrap: wrap;
+				align-items: center;">
+			<div id="类型" class="dropdown">
+				<span style="padding-left: 20%;">类型</span>
+				<img id="img_a" style="margin-left: 4px;" src="/static/img/list/down.png" />
+				<div class="dropdown-content">
+					<li id="全部" class="panel-body">
+						全部
+						<div class="line"></div>
+					</li>
+					<li id="在谈" class="panel-body">
+						在谈
+						<div class="line"></div>
+					</li>
+					<li id="签约" class="panel-body">
+						签约
+						<div class="line"></div>
+					</li>
+					<li id="开工" class="panel-body">
+						开工
+						<div class="line"></div>
+					</li>
+					<li id="投产" class="panel-body">
+						投产
+						<div class="line"></div>
+					</li>
+					<li id="收尾" class="panel-body">
+						收尾
+						<div class="line"></div>
+					</li>
+				</div>
+			</div>
+			<div id="区域" class="dropdown">
+				<span style="padding-left: 20%;">区域</span>
+				<img id="img_b" style="margin-left: 4px;" src="/static/img/list/down.png" />
+				<div class="dropdown-content dropdown-content-after">
+					<li id="全部">全部
+						<div class="line"></div>
+					</li>
+					<li id="高新区">高新区
+						<div class="line"></div>
+					</li>
+					<li id="地信小镇">地信小镇
+						<div class="line"></div>
+					</li>
+					<li id="通航小镇">通航小镇
+						<div class="line"></div>
+					</li>
+				</div>
+			</div>
+			<div id="排序" class="dropdown">
+				<span style="padding-left: 20%;">排序</span>
+				<img id="img_c" style="margin-left: 4px;" src="/static/img/list/down.png" />
+				<div class="dropdown-content">
+					<li id="开工时间">开工时间
+						<div class="line"></div>
+					</li>
+					<li id="总投资金额">总投资金额
+						<div class="line"></div>
+					</li>
+				</div>
+			</div>
+		</div>
+		<div class="mui-content">
+			<ul id="dateJson" class="mui-table-view mui-table-view-striped mui-table-view-condensed">
+				<!--<li id="testLi1" class="table-view-li-qianyue table-view-li-list">
+					<div class="table-view-li-div">
+						<div class="table-view-li-div-div1">项目名称：氢能源汽车项目</div>
+						<div class="table-view-li-div-div1">开工时间：2018-11-02</div>
+						<div class="table-view-li-div-div2">项目编号：123456789</div>
+						<div class="table-view-li-div-div2">投资金额：113亿</div>
+					</div>
+				</li>-->
+				<!--<li class="mui-table-view-cell">
+		            <div class="mui-table">
+		                <div class="mui-table-cell mui-col-xs-10">
+		                    <h4 class="mui-ellipsis-2">信息化推进办公室张彦合同付款信息化推进办公室张彦合同付款信息化推进办公室张彦合同付款</h4>
+		                    <h5>申请人：李四</h5>
+		                    <p class="mui-h6 mui-ellipsis">Hi，李明明，申请交行信息卡，100元等你拿，李明明，申请交行信息卡，100元等你拿，</p>
+		                </div>
+		                <div class="mui-table-cell mui-col-xs-2 mui-text-right">
+		                    <span class="mui-h5">12:25</span>
+		                     
+		                </div>
+		            </div>
+		        </li>-->
+
+			</ul>
+		</div>
+	</body>
+	<script src="/static/js/mui.min.js"></script>
+	<script>
+		mui.init({
+			swipeBack: true //启用右滑关闭功能
+		});
+	</script>
+
+</html>

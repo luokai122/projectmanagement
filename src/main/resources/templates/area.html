@@ -1,0 +1,179 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>项目空间分布</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="/static/css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="/static/js/plug-in/leaflet/leaflet.css" />
+		<link rel="stylesheet" href="/static/css/trail_map.css" />
+		<link rel="stylesheet" href="/static/css/area.css" />
+	</head>
+
+	<body>
+
+		<div class="mui-content">
+			<div id="mapbox">
+				<div class="viewbox">
+					<div id="mapview">
+					</div>
+					<div class="title">
+						<div class="title_search">
+							<div class="search_img">
+								<img src="/static/img/list/icon_search.png" />
+							</div>
+						</div>
+						<div class="search_icon">
+							<img src="/static/img/list/title_line.png" />
+						</div>
+			
+						<div class="more">
+							<div class="more_text">
+								<input type="text" name="" id="selectInput" placeholder="请输入关键字" value="" style="
+											margin-bottom: 0px;
+											padding: 0px 0px; 
+											background:none;
+											border: none;
+											font-size: 14px;
+											font-family: '微软雅黑 ';
+											color: #333333;" />
+							</div>
+							
+						</div>
+						<div class="lists">
+							<img src="/static/img/area/icon_list.png" />
+						</div>
+					</div>
+					<div class="location">
+						<img src="/static/img/area/button_location.png" />
+					</div>
+					<div class="zoomUpdown">
+						<div class="zoomUp">
+							<img style="width: 20px;height: 20px;" src="/static/img/zoomout.png" />
+						</div>
+						<div class="linediv">
+							<div class="line"></div>
+						</div>
+						<div class="zoomDown">
+							<img style="margin-bottom:28px;width: 20px;" src="/static/img/zoomin.png" />
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src="/static/js/mui.min.js"></script>
+		<script type="text/javascript" src="/static/js/plug-in/jq/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="/static/js/plug-in/leaflet/leaflet-src.js"></script>
+		<script type="text/javascript" src="/static/js/plug-in/leaflet/leaflet.js"></script>
+		<script src="http://api.tianditu.com/api?v=4.0" type="text/javascript"></script>
+		<script type="text/javascript" src="https://3gimg.qq.com/lightmap/components/geolocation/geolocation.min.js"></script>
+		<script type="text/javascript" src="/static/js/jcg02to84.js"></script>
+		<script type="text/javascript">
+			mui.init();
+			var map;
+			//覆盖点击图标
+			var click_spot;
+			var oldid;
+			$(function() {
+				$("#mapbox").width($(window).width());
+				$("#mapbox").height($(window).height());
+				map = L.map('mapview', {
+					zoomControl: false, //隐藏缩放按钮
+					attributionControl: false, //属性，默认显示
+					//					crs: L.CRS.EPSG4326
+					fullscreenControl: {
+						pseudoFullscreen: true
+					} //全屏*/
+				}).setView([30.524116670095484, 119.97500754404051], 17);
+				//腾讯坐标30.5216500000,119.9796600000
+				//转换坐标119.97500754404051,30.524116670095484
+				//					L.control.zoom({
+				//						position: 'bottomright'
+				//					}).addTo(map);
+				var zjemap = L.tileLayer("http://t{s}.tianditu.cn/vec_w/wmts?service=wmts&request=GetTile&version=1.0.0&LAYER=vec&tileMatrixSet=w&TileMatrix={z}&TileRow={y}&TileCol={x}&style=default&format=tiles", {
+						subdomains: ["0", "1", "2", "3", "4", "5", "6", "7"],
+						minZoom: 3,
+						maxZoom: 18,
+					}),
+					zjemap_lab = L.tileLayer("http://t{s}.tianditu.cn/cva_w/wmts?service=wmts&request=GetTile&version=1.0.0&LAYER=cva&tileMatrixSet=w&TileMatrix={z}&TileRow={y}&TileCol={x}&style=default&format=tiles", {
+						subdomains: ["0", "1", "2", "3", "4", "5", "6", "7"],
+						minZoom: 3,
+						maxZoom: 18,
+					}),
+					imgmap = L.tileLayer("http://t{s}.tianditu.cn/img_w/wmts?service=wmts&request=GetTile&version=1.0.0&LAYER=img&tileMatrixSet=w&TileMatrix={z}&TileRow={y}&TileCol={x}&style=default&format=tiles", {
+						subdomains: ["0", "1", "2", "3", "4", "5", "6", "7"],
+						minZoom: 3,
+						maxZoom: 18,
+					}),
+					imgmap_lab = L.tileLayer("http://t{s}.tianditu.cn/cia_w/wmts?service=wmts&request=GetTile&version=1.0.0&LAYER=cia&tileMatrixSet=w&TileMatrix={z}&TileRow={y}&TileCol={x}&style=default&format=tiles", {
+						subdomains: ["0", "1", "2", "3", "4", "5", "6", "7"],
+						minZoom: 3,
+						maxZoom: 18,
+					});
+				var baseMaps = {
+					"电子地图": zjemap,
+					"影像地图": imgmap
+				};
+
+				var baseImgmapLab = {
+					"影像注记": imgmap_lab
+				};
+
+				L.control.layers(baseMaps).addTo(map);
+				// 边界
+				L.tileLayer("http://t{s}.tianditu.cn/ibo_w/wmts?service=wmts&request=GetTile&version=1.0.0&LAYER=ibo&tileMatrixSet=w&TileMatrix={z}&TileRow={y}&TileCol={x}&style=default&format=tiles", {
+					subdomains: ["0", "1", "2", "3", "4", "5", "6", "7"],
+					minZoom: 3,
+					maxZoom: 18,
+				}).addTo(map);
+
+				baseMaps.电子地图.addTo(map);
+				zjemap_lab.addTo(map);
+				zjemap_lab.setZIndex(2); //数值越大，图层越靠上
+				map.on('baselayerchange', function(e) {
+					if(map.hasLayer(imgmap)) {
+						map.removeLayer(zjemap);
+						map.removeLayer(zjemap_lab);
+						map.addLayer(imgmap_lab);
+						imgmap_lab.setZIndex(2); //数值越大，图层越靠上
+						//baseImgmapLab.影像注记.addTo(map);
+					} else {
+						map.removeLayer(imgmap);
+						map.removeLayer(imgmap_lab);
+						map.addLayer(zjemap_lab);
+						zjemap_lab.setZIndex(2); //数值越大，图层越靠上
+					}
+				});
+				map.on("popupopen", function(e) {
+					$(".leaflet-popup-pane").css("visibility", "hidden");
+					setTimeout(function() {
+						var contentbox = e.popup._contentNode;
+						var div = $(contentbox).children(".box").children("div");
+						var width = 0;
+						for(var i = 0; i < div.length; i++) {
+							var divwidth = $(div[i]).width();
+							width = width + divwidth;
+						}
+						$(contentbox).css("width", width + "px");
+						$(".leaflet-popup-pane").css("visibility", "visible");
+					}, 300);
+				});
+				map.on("popupclose", function(e) {
+					var closespot = e.popup.options.spotname;
+					if(closespot != "起点" && closespot != "终点") {
+						if(click_spot != undefined && click_spot != "") {
+							var liid = click_spot.options.liid;
+							$("#" + liid + "").removeClass("active");
+							map.removeLayer(click_spot);
+							oldid = "";
+							click_spot = "";
+						}
+					}
+				})
+			});
+		</script>
+		<script type="text/javascript" src="/static/js/common.js"></script>
+		<script type="text/javascript" src="/static/js/area.js"></script>
+	</body>
+</html>

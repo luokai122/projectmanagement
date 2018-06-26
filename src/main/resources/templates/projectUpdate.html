@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>新增项目</title>
+</head>
+
+<script src="/static/js/jquery-3.3.1.min.js"></script>
+<script src="/static/js/angular.min.js"></script>
+<style>
+    body{
+        background-color: #cccccc;
+    }
+    .project{
+        width: 93%;
+        background-color: #ffffff;
+        box-shadow: rgba(0,0,0,0.3) 8px 20px;
+        border-radius: 10px;
+        margin-left: 3%;
+        margin-top: 3%;
+        height: 100%;
+    }
+    p{
+        font-size: 38px;
+        font-family: "Microsoft YaHei";
+        margin: 4% 0% 3% 3%;
+    }
+
+    input{
+        font-size: 38px;
+        font-family: "Microsoft YaHei";
+        float: right;
+        margin-right: 20px;
+        text-align: right;
+        border: 0px;
+    }
+    span{
+        font-size: 38px;
+        font-family: "Microsoft YaHei";
+        float: right;
+        margin-right: 20px;
+    }
+    .line {
+        display: inline-block;
+        height:1px;
+        width:100%;
+        background:#cccccc;
+        overflow:hidden;
+        vertical-align: middle;
+    }
+    textarea{
+        font-size: 18px;
+        font-family: "Microsoft YaHei";
+        border: 0px;
+        float: none;
+        margin-left: 3%;
+        width: 95%;
+       height: 200px;
+    }
+    .button-sub{
+        border: solid 1px;
+        font-size: 40px;
+        margin: 5% 0% 5% 39%;
+        width: 25%;
+        background-color: #0099ff;
+        color: #ffffff;
+        border-radius: 10px;
+        text-align: center;
+        height: 90px;
+        line-height: 90px;
+    }
+    .select{
+        font-size: 38px;
+        font-family: "Microsoft YaHei";
+        float: right;
+        margin-right: 20px;
+        text-align: right;
+        border: 0px;
+    }
+    option{
+        font-size: 15px;
+    }
+    .pup{
+        display: none;
+        width: 75%;
+        height: 4%;
+        position: absolute;
+        top: 175%;
+        left: 12.5%;
+        z-index: 5000;
+        color: #ffffff;
+        text-align: center;
+        line-height: 5%;
+        font-family: "Microsoft YaHei";
+        font-size: 38px;
+        border-radius: 10px;
+    }
+
+</style>
+<script>
+    var user;
+    $(function () {
+        var str=location.href; //取得整个地址栏
+        console.log(str)
+        if(str.indexOf("?")==-1){
+            return
+        }else{
+            var num=str.split("?")
+            var id = num[1].split("=")[1];
+        }
+
+
+        $.ajax({
+            url: "/getAllUser",
+            async: false,
+            success: function(data){
+                user = data.data;
+                for(let i=0;i<data.data.length;i++){
+
+                   if(i==0){
+                        $("#reSelect").append("<option value="+data.data[i].username+" selected='selected'>"+data.data[i].nickname+"</option>")
+                        $("#conSelect").append("<option value="+data.data[i].username+" selected='selected'>"+data.data[i].nickname+"</option>")
+                    }else{
+                        $("#reSelect").append("<option value="+data.data[i].username+" >"+data.data[i].nickname+"</option>")
+                        $("#conSelect").append("<option value="+data.data[i].username+">"+data.data[i].nickname+"</option>")
+                    }
+
+                }
+            }
+        });
+        $.ajax({
+            url: "/static/selectPJInfo",
+            async: false,
+            data:{
+              id:id
+            },
+            success: function(data){
+                var project = data.data;
+                console.log()
+                $("#projectid").val(project[0].projectid)
+                $("#department").val(project[0].department)
+                $("#investor").val(project[0].investor)
+                $("#struct").val(project[0].struct)
+                $("#projectname").val(project[0].projectname)
+                $("#projectstatus option[value='"+project[0].projectstatus +"']").attr("selected",true);
+                $("#projectinfo").val(project[0].projectinfo)
+                $("#amountinvested").val(project[0].amountinvested)
+                $("#belongarea option[value='"+project[0].belongarea +"']").attr("selected",true);
+                $("#address").val(project[0].address)
+                $("#areaid").val(project[0].areaid)
+                $("#area").val(project[0].area)
+                $("#signtime").val(project[0].signtime)
+                $("#expecttax").val(project[0].expecttax)
+                $("#expectvalue").val(project[0].expectvalue)
+                $("#endtime").val(project[0].endtime)
+                $("#reSelect option[value='"+project[0].responsibleren+"']").attr("selected",true);
+                $("#conSelect option[value='"+project[0].contactren+"']").attr("selected",true);
+                $("#renTel").empty();
+                $("#renTel").append(project[0].responsiblerenTell);
+                $("#conTel").empty();
+                $("#conTel").append(project[0].contactrenTell);
+            }
+        });
+    });
+    function changeRen(v) {
+        for(let i=0;i<user.length;i++){
+            if(user[i].username==v.value){
+                $("#renTel").empty();
+                $("#renTel").append(user[i].usertell);
+                return;
+            }
+
+
+        }
+    }
+    function changeCon(v) {
+        for(let i=0;i<user.length;i++){
+            if(user[i].username==v.value){
+                $("#conTel").empty();
+                $("#conTel").append(user[i].usertell);
+                return;
+            }
+        }
+    }
+    function insertProject() {
+
+        /*var amount = $("#amountinvested").val();
+
+        var reg = /^[0-9]+.?[0-9]*$/;
+        if(!reg.test(amount)){
+            $("#pup").css("backgroundColor","#B22222");
+            $("#pup p").empty();
+            $("#pup p").append("提交失败！请在总投资里输入数字！");
+            $ ('.pup').show ().delay (3000).fadeOut ();
+            return;
+        }*/
+
+
+        $.ajax({
+            url: "/updateProject",
+            data:{
+                id:"1",
+                projectid:$("#projectid").val(),
+                department:$("#department").val(),
+                investor:$("#investor").val(),
+                struct:$("#struct").val(),
+                projectname:$("#projectname").val(),
+                projectstatus:$("#projectstatus  option:selected").val(),
+                projectinfo:$("#projectinfo").val(),
+                amountinvested:$("#amountinvested").val(),
+                belongarea:$("#belongarea option:selected").val(),
+                address:$("#address").val(),
+                areaid:$("#areaid").val(),
+                area:$("#area").val(),
+                signtime:$("#signtime").val(),
+                expecttax:$("#expecttax").val(),
+                expectvalue:$("#expectvalue").val(),
+                starttime:$("#starttime").val(),
+                endtime:$("#endtime").val(),
+                responsibleren:$("#reSelect option:selected").val(),
+                contactren:$("#conSelect option:selected").val()
+            },
+            success: function(data){
+                console.log(data);
+                if(data.code=="SUCCESS"){
+                    window.location.href="/";
+                }else{
+                    $("#pup").css("backgroundColor","#B22222");
+                    $("#pup p").empty();
+                    $("#pup p").append("提交失败！"+data.message);
+                    $ ('.pup').show ().delay (3000).fadeOut ();
+                }
+
+            }
+
+        });
+
+    }
+</script>
+<body >
+    <div class="project">
+        <div style="height: 20px"></div>
+       <div>
+           <p style="text-align: center;">项目详情</p>
+           <p>项目编号
+           <input id="projectid"  type="text"></p>
+       </div>
+        <div class="line"></div>
+        <div>
+            <p>项目名称<input id="projectname"  type="text"></p>
+        </div>
+        <div class="line"></div>
+        <div>
+            <p>牵头部门<input id="department"  type="text"></p>
+        </div>
+        <div class="line"></div>
+        <div>
+            <p>投资方<input id="investor"  type="text"></p>
+        </div>
+        <div class="line"></div>
+        <div>
+            <p>建设单位<input id="struct"  type="text"></p>
+        </div>
+        <div class="line"></div>
+        <div>
+            <p>签约情况<select id="projectstatus" class="select" >
+                <option selected='selected'value="1">在谈</option>
+                <option value="2">签约</option>
+                <option value="3">开工</option>
+                <option value="4">投产</option>
+                <option value="5">收尾</option>
+            </select></p>
+        </div>
+        <div class="line"></div>
+        <div>
+            <p>总投资（亿）<input id="amountinvested" type="text"></p>
+        </div>
+        <div class="line"></div>
+        <div>
+            <p>归属区域
+                <select id="belongarea" class="select" >
+                    <option selected='selected'value="1">科技新城</option>
+                    <option value="2">通航小镇</option>
+                    <option value="3">高新区</option>
+                </select>
+            </p>
+        </div>
+        <div class="line"></div>
+        <div>
+            <p>地址<input id="address"  type="text"></p>
+        </div>
+        <div class="line"></div>
+        <div>
+            <p>项目地块<input id="areaid"  type="text"></p>
+        </div>
+        <div class="line"></div>
+        <div>
+            <p>用地面积<input id="area"  type="text"></p>
+        </div>
+        <div class="line"></div>
+        <div>
+            <p>签约时间<input id="signtime" type="date" value="2014-01-13"></p>
+        </div>
+        <div class="line"></div>
+        <div>
+            <p>预计产值<input id="expectvalue"  type="text"></p>
+        </div>
+        <div class="line"></div>
+        <div>
+            <p>预期利税<input id="expecttax"  type="text"></p>
+        </div>
+        <div class="line"></div>
+        <div>
+            <p>开工时间<input id="starttime"  type="date" value="2014-01-13"></p>
+        </div>
+        <div class="line"></div>
+        <div>
+            <p>竣工时间<input id="endtime" type="date" value="2014-01-13"></p>
+        </div>
+        <div class="line"></div>
+        <div>
+            <p>项目责任领导
+                <select class="select" id="reSelect" onchange="changeRen(this)"></select>
+            </p>
+        </div>
+        <div class="line"></div>
+        <div>
+            <p>责任领导联系电话<span id="renTel" style="color: #0099ff"  type="text">18563265965</span></p>
+        </div>
+        <div class="line"></div>
+        <div>
+            <p>项目联系人
+                <select  class="select" id="conSelect" onchange="changeCon(this)"></select>
+            </p>
+        </div>
+        <div class="line"></div>
+        <div>
+        <p>项目联系人电话<span id="conTel" style="color: #0099ff"  type="text">18563265965</span></p>
+        </div>
+        <div class="line"></div>
+        <div>
+            <p>项目内容：</p><textarea id="projectinfo" rows=4></textarea>
+            <!--<textarea  class="projectContents" cols="27" onscroll="this.rows++;"  type="text"></textarea>-->
+        </div>
+
+        <div class="button-sub" onclick="insertProject()">
+            完成
+        </div>
+        <div class="pup" id="pup">
+            <p>提示信息</p>
+        </div>
+    </div>
+</body>
+</html>

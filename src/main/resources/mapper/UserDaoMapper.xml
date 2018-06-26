@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.toprs.projectmanagenment.mapper.security.UserDao">
+    <resultMap id="userMap" type="cn.toprs.projectmanagenment.entity.SysUser">
+        <id property="id" column="ID"/>
+        <result property="username" column="username"/>
+        <result property="password" column="PASSWORD"/>
+        <collection property="roles" ofType="cn.toprs.projectmanagenment.entity.SysRole">
+            <result column="name" property="name"/>
+        </collection>
+    </resultMap>
+
+    <select id="findByUserName" parameterType="String" resultMap="userMap">
+		select u.id,u.username,u.password
+		,r.name
+		from Sys_User u
+        LEFT JOIN sys_role_user sru on u.id= sru.Sys_User_id
+        LEFT JOIN Sys_Role r on sru.Sys_Role_id=r.id
+        where username= #{username} and delFlag='1'
+	</select>
+
+    <select id="selectByUserName" resultType="cn.toprs.projectmanagenment.entity.SysUser" parameterType="java.lang.String" >
+        select
+        id as id,
+        userName as username,
+        nickName as nickname,
+        userTell as usertell,
+        userArea as userarea,
+        creatime
+        from Sys_User
+        where userName = #{username,jdbcType=VARCHAR}
+    </select>
+
+    <insert id="insertUser" parameterType="cn.toprs.projectmanagenment.entity.SysUser">
+      insert into Sys_User
+      (username,password,nickName,userTell,postive,userArea,creatime,delFlag
+      )values(
+      #{username}, #{password}, #{nickname},
+      #{usertell},"领导", #{userarea}, #{creatime},"1"
+      )
+    </insert>
+
+    <update id="updateUser" parameterType="cn.toprs.projectmanagenment.entity.SysUser">
+      update Sys_User
+        <set>
+            <if test="password !=null">
+                password = #{password},
+            </if>
+            <if test="nickname !=null">
+                nickName = #{nickname},
+            </if>
+            <if test="usertell !=null">
+                userTell = #{usertell},
+            </if>
+            <if test="userarea !=null">
+                userArea = #{userarea},
+            </if>
+            <if test="delFlag !=null">
+                delFlag = #{delFlag}
+            </if>
+        </set>
+        where username =#{username}
+    </update>
+
+    <update id="deleteUser" parameterType="cn.toprs.projectmanagenment.entity.SysUser">
+        update Sys_User
+          set delFlag = #{delFlag},
+          delDate = #{delDate}
+          where username =#{username}
+    </update>
+
+    <select id="selectUser" parameterType="String" resultType="cn.toprs.projectmanagenment.entity.SysUser">
+       select
+        id as id,
+        userName as username,
+        nickName as nickname,
+        password ,
+        postive,
+        userTell as usertell,
+        userArea as userarea,
+        creatime,
+        delFlag
+        from Sys_User
+        <where>
+            <if test="value != null and value != ''">
+                or (username like concat('%',#{selectStr},'%')
+                or nickName like concat('%',#{selectStr},'%')
+                or userTell like concat('%',#{selectStr},'%') )
+            </if>
+
+        </where>
+    </select>
+
+    <select id="getAllUser" resultType="cn.toprs.projectmanagenment.entity.SysUser">
+        select
+        id as id,
+        userName as username,
+        nickName as nickname,
+        userTell as usertell,
+        userArea as userarea,
+        creatime
+        from Sys_User
+    </select>
+
+</mapper>

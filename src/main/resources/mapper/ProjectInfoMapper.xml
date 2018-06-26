@@ -1,0 +1,479 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.toprs.projectmanagenment.mapper.ProjectInfoMapper" >
+  <resultMap id="BaseResultMap" type="cn.toprs.projectmanagenment.entity.ProjectInfo" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="projectId" property="projectid" jdbcType="VARCHAR" />
+    <result column="department" property="department" jdbcType="VARCHAR" />
+    <result column="investor" property="investor" jdbcType="VARCHAR" />
+    <result column="struct" property="struct" jdbcType="VARCHAR" />
+    <result column="projectName" property="projectname" jdbcType="VARCHAR" />
+    <result column="projectStatus" property="projectstatus" jdbcType="VARCHAR" />
+    <result column="projectInfo" property="projectinfo" jdbcType="VARCHAR" />
+    <result column="amountInvested" property="amountinvested" jdbcType="VARCHAR" />
+    <result column="belongArea" property="belongarea" jdbcType="INTEGER" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="latitude" property="latitude" jdbcType="DOUBLE" />
+    <result column="longitude" property="longitude" jdbcType="DOUBLE" />
+    <result column="areaID" property="areaid" jdbcType="VARCHAR" />
+    <result column="area" property="area" jdbcType="VARCHAR" />
+    <result column="signTime" property="signtime" jdbcType="TIMESTAMP" />
+    <result column="expectTax" property="expecttax" jdbcType="VARCHAR" />
+    <result column="expectValue" property="expectvalue" jdbcType="VARCHAR" />
+    <result column="startTime" property="starttime" jdbcType="TIMESTAMP" />
+    <result column="endTime" property="endtime" jdbcType="TIMESTAMP" />
+    <result column="responsibleRen" property="responsibleren" jdbcType="VARCHAR" />
+    <result column="contactRen" property="contactren" jdbcType="VARCHAR" />
+    <result column="createdate" property="createdate" jdbcType="TIMESTAMP" />
+    <result column="updateUser" property="updateuser" jdbcType="VARCHAR" />
+    <result column="updatedate" property="updatedate" jdbcType="TIMESTAMP" />
+    <result column="deldate" property="deldate" jdbcType="TIMESTAMP" />
+    <result column="delFlag" property="delflag" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, projectId, department, investor, struct, projectName, projectStatus, projectInfo, 
+    amountInvested, belongArea, address, latitude, longitude, areaID, area, signTime, 
+    expectTax, expectValue, startTime, endTime, responsibleRen, contactRen, createdate, 
+    updateUser, updatedate, deldate, delFlag
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from projectinfo
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from projectinfo
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.toprs.projectmanagenment.entity.ProjectInfo" >
+    insert into projectinfo (id, projectId, department, 
+      investor, struct, projectName, 
+      projectStatus, projectInfo, amountInvested, 
+      belongArea, address, latitude, 
+      longitude, areaID, area, 
+      signTime, expectTax, expectValue, 
+      startTime, endTime, responsibleRen, 
+      contactRen, createdate, updateUser, 
+      updatedate, deldate, delFlag
+      )
+    values (#{id,jdbcType=INTEGER}, #{projectid,jdbcType=VARCHAR}, #{department,jdbcType=VARCHAR},
+      #{investor,jdbcType=VARCHAR}, #{struct,jdbcType=VARCHAR}, #{projectname,jdbcType=VARCHAR}, 
+      #{projectstatus,jdbcType=VARCHAR}, #{projectinfo,jdbcType=VARCHAR}, #{amountinvested,jdbcType=VARCHAR},
+      #{belongarea,jdbcType=INTEGER}, #{address,jdbcType=VARCHAR}, #{latitude,jdbcType=DOUBLE}, 
+      #{longitude,jdbcType=DOUBLE}, #{areaid,jdbcType=VARCHAR}, #{area,jdbcType=VARCHAR}, 
+      #{signtime,jdbcType=TIMESTAMP}, #{expecttax,jdbcType=VARCHAR}, #{expectvalue,jdbcType=VARCHAR},
+      #{starttime,jdbcType=TIMESTAMP}, #{endtime,jdbcType=TIMESTAMP}, #{responsibleren,jdbcType=VARCHAR}, 
+      #{contactren,jdbcType=VARCHAR}, #{createdate,jdbcType=TIMESTAMP}, #{updateuser,jdbcType=VARCHAR},
+      #{updatedate,jdbcType=TIMESTAMP}, #{deldate,jdbcType=TIMESTAMP}, #{delflag,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.toprs.projectmanagenment.entity.ProjectInfo" >
+    insert into projectinfo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="projectid != null" >
+        projectId,
+      </if>
+      <if test="department != null" >
+        department,
+      </if>
+      <if test="investor != null" >
+        investor,
+      </if>
+      <if test="struct != null" >
+        struct,
+      </if>
+      <if test="projectname != null" >
+        projectName,
+      </if>
+      <if test="projectstatus != null" >
+        projectStatus,
+      </if>
+      <if test="projectinfo != null" >
+        projectInfo,
+      </if>
+      <if test="amountinvested != null" >
+        amountInvested,
+      </if>
+      <if test="belongarea != null" >
+        belongArea,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="latitude != null" >
+        latitude,
+      </if>
+      <if test="longitude != null" >
+        longitude,
+      </if>
+      <if test="areaid != null" >
+        areaID,
+      </if>
+      <if test="area != null" >
+        area,
+      </if>
+      <if test="signtime != null" >
+        signTime,
+      </if>
+      <if test="expecttax != null" >
+        expectTax,
+      </if>
+      <if test="expectvalue != null" >
+        expectValue,
+      </if>
+      <if test="starttime != null" >
+        startTime,
+      </if>
+      <if test="endtime != null" >
+        endTime,
+      </if>
+      <if test="responsibleren != null" >
+        responsibleRen,
+      </if>
+      <if test="contactren != null" >
+        contactRen,
+      </if>
+      <if test="createdate != null" >
+        createdate,
+      </if>
+      <if test="updateuser != null" >
+        updateUser,
+      </if>
+      <if test="updatedate != null" >
+        updatedate,
+      </if>
+      <if test="deldate != null" >
+        deldate,
+      </if>
+      <if test="delflag != null" >
+        delFlag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="projectid != null" >
+        #{projectid,jdbcType=VARCHAR},
+      </if>
+      <if test="department != null" >
+        #{department,jdbcType=VARCHAR},
+      </if>
+      <if test="investor != null" >
+        #{investor,jdbcType=VARCHAR},
+      </if>
+      <if test="struct != null" >
+        #{struct,jdbcType=VARCHAR},
+      </if>
+      <if test="projectname != null" >
+        #{projectname,jdbcType=VARCHAR},
+      </if>
+      <if test="projectstatus != null" >
+        #{projectstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="projectinfo != null" >
+        #{projectinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="amountinvested != null" >
+        #{amountinvested,jdbcType=VARCHAR},
+      </if>
+      <if test="belongarea != null" >
+        #{belongarea,jdbcType=INTEGER},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="latitude != null" >
+        #{latitude,jdbcType=DOUBLE},
+      </if>
+      <if test="longitude != null" >
+        #{longitude,jdbcType=DOUBLE},
+      </if>
+      <if test="areaid != null" >
+        #{areaid,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null" >
+        #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="signtime != null" >
+        #{signtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="expecttax != null" >
+        #{expecttax,jdbcType=VARCHAR},
+      </if>
+      <if test="expectvalue != null" >
+        #{expectvalue,jdbcType=VARCHAR},
+      </if>
+      <if test="starttime != null" >
+        #{starttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endtime != null" >
+        #{endtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="responsibleren != null" >
+        #{responsibleren,jdbcType=VARCHAR},
+      </if>
+      <if test="contactren != null" >
+        #{contactren,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null" >
+        #{createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateuser != null" >
+        #{updateuser,jdbcType=INTEGER},
+      </if>
+      <if test="updatedate != null" >
+        #{updatedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deldate != null" >
+        #{deldate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="delflag != null" >
+        #{delflag,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.toprs.projectmanagenment.entity.ProjectInfo" >
+    update projectinfo
+    <set >
+      <if test="projectid != null" >
+        projectId = #{projectid,jdbcType=VARCHAR},
+      </if>
+      <if test="department != null" >
+        department = #{department,jdbcType=VARCHAR},
+      </if>
+      <if test="investor != null" >
+        investor = #{investor,jdbcType=VARCHAR},
+      </if>
+      <if test="struct != null" >
+        struct = #{struct,jdbcType=VARCHAR},
+      </if>
+      <if test="projectname != null" >
+        projectName = #{projectname,jdbcType=VARCHAR},
+      </if>
+      <if test="projectstatus != null" >
+        projectStatus = #{projectstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="projectinfo != null" >
+        projectInfo = #{projectinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="amountinvested != null" >
+        amountInvested = #{amountinvested,jdbcType=VARCHAR},
+      </if>
+      <if test="belongarea != null" >
+        belongArea = #{belongarea,jdbcType=INTEGER},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="latitude != null" >
+        latitude = #{latitude,jdbcType=DOUBLE},
+      </if>
+      <if test="longitude != null" >
+        longitude = #{longitude,jdbcType=DOUBLE},
+      </if>
+      <if test="areaid != null" >
+        areaID = #{areaid,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null" >
+        area = #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="signtime != null" >
+        signTime = #{signtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="expecttax != null" >
+        expectTax = #{expecttax,jdbcType=VARCHAR},
+      </if>
+      <if test="expectvalue != null" >
+        expectValue = #{expectvalue,jdbcType=VARCHAR},
+      </if>
+      <if test="starttime != null" >
+        startTime = #{starttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endtime != null" >
+        endTime = #{endtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="responsibleren != null" >
+        responsibleRen = #{responsibleren,jdbcType=VARCHAR},
+      </if>
+      <if test="contactren != null" >
+        contactRen = #{contactren,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null" >
+        createdate = #{createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateuser != null" >
+        updateUser = #{updateuser,jdbcType=VARCHAR},
+      </if>
+      <if test="updatedate != null" >
+        updatedate = #{updatedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deldate != null" >
+        deldate = #{deldate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="delflag != null" >
+        delFlag = #{delflag,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.toprs.projectmanagenment.entity.ProjectInfo" >
+    update projectinfo
+    set projectId = #{projectid,jdbcType=VARCHAR},
+      department = #{department,jdbcType=VARCHAR},
+      investor = #{investor,jdbcType=VARCHAR},
+      struct = #{struct,jdbcType=VARCHAR},
+      projectName = #{projectname,jdbcType=VARCHAR},
+      projectStatus = #{projectstatus,jdbcType=VARCHAR},
+      projectInfo = #{projectinfo,jdbcType=VARCHAR},
+      amountInvested = #{amountinvested,jdbcType=VARCHAR},
+      belongArea = #{belongarea,jdbcType=INTEGER},
+      address = #{address,jdbcType=VARCHAR},
+      latitude = #{latitude,jdbcType=DOUBLE},
+      longitude = #{longitude,jdbcType=DOUBLE},
+      areaID = #{areaid,jdbcType=VARCHAR},
+      area = #{area,jdbcType=VARCHAR},
+      signTime = #{signtime,jdbcType=TIMESTAMP},
+      expectTax = #{expecttax,jdbcType=VARCHAR},
+      expectValue = #{expectvalue,jdbcType=VARCHAR},
+      startTime = #{starttime,jdbcType=TIMESTAMP},
+      endTime = #{endtime,jdbcType=TIMESTAMP},
+      responsibleRen = #{responsibleren,jdbcType=VARCHAR},
+      contactRen = #{contactren,jdbcType=VARCHAR},
+      createdate = #{createdate,jdbcType=TIMESTAMP},
+      updateUser = #{updateuser,jdbcType=VARCHAR},
+      updatedate = #{updatedate,jdbcType=TIMESTAMP},
+      deldate = #{deldate,jdbcType=TIMESTAMP},
+      delFlag = #{delflag,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectProject" resultMap="BaseResultMap" parameterType="cn.toprs.projectmanagenment.entity.SysUser" >
+    select
+    <include refid="Base_Column_List" />
+    from projectinfo
+    <where>
+      <if test='userarea !="0"'>
+        (responsibleRen =#{username}
+        or contactRen = #{username}
+        or   belongArea =#{userarea})
+      </if>
+      and delFlag = '1'
+    </where>
+  </select>
+
+  <update id="deleteById" parameterType="cn.toprs.projectmanagenment.entity.ProjectInfo" >
+    update projectinfo
+    set
+      deldate = #{deldate,jdbcType=TIMESTAMP},
+      delFlag = #{delflag,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectProjectByCon" resultMap="BaseResultMap" parameterType="cn.toprs.projectmanagenment.entity.ProjectInfo" >
+    select
+    <include refid="Base_Column_List" />
+    from
+      (select
+          <include refid="Base_Column_List" />
+      from projectinfo
+      <where>
+        <if test='userarea !="0"'>
+          (responsibleRen =#{username}
+          or contactRen = #{username}
+          or   belongArea =#{userarea})
+        </if>
+        <if  test='selectStr !=null'>
+          and (responsibleRen like concat('%',#{selectStr},'%')
+          or contactren like concat('%',#{selectStr},'%')
+          or projectname like concat('%',#{selectStr},'%')
+          or projectid like concat('%',#{selectStr},'%') )
+        </if>
+        and delFlag = '1'
+      </where>
+    ) p
+    <where>
+      <if test="id != null" >
+        id = #{id,jdbcType=INTEGER}
+      </if>
+      <if test="projectid != null" >
+          projectId = #{projectid,jdbcType=VARCHAR}
+      </if>
+      <if test="department != null" >
+        and department = #{department,jdbcType=VARCHAR}
+      </if>
+      <if test="investor != null" >
+        and investor = #{investor,jdbcType=VARCHAR}
+      </if>
+      <if test="struct != null" >
+        and struct = #{struct,jdbcType=VARCHAR}
+      </if>
+      <if test="projectname != null" >
+        and projectName = #{projectname,jdbcType=VARCHAR}
+      </if>
+      <if test="projectstatus != null" >
+        and projectStatus = #{projectstatus,jdbcType=VARCHAR}
+      </if>
+      <if test="projectinfo != null" >
+        and projectInfo = #{projectinfo,jdbcType=VARCHAR}
+      </if>
+      <if test="amountinvested != null" >
+        and amountInvested = #{amountinvested,jdbcType=VARCHAR}
+      </if>
+      <if test="belongarea != null" >
+        and belongArea = #{belongarea,jdbcType=INTEGER}
+      </if>
+      <if test="address != null" >
+        and address = #{address,jdbcType=VARCHAR}
+      </if>
+      <if test="latitude != null" >
+        and latitude = #{latitude,jdbcType=DOUBLE}
+      </if>
+      <if test="longitude != null" >
+        and longitude = #{longitude,jdbcType=DOUBLE}
+      </if>
+      <if test="areaid != null" >
+        and areaID = #{areaid,jdbcType=VARCHAR}
+      </if>
+      <if test="area != null" >
+        and area = #{area,jdbcType=VARCHAR}
+      </if>
+      <if test="signtime != null" >
+        and signTime = #{signtime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="expecttax != null" >
+        and expectTax = #{expecttax,jdbcType=VARCHAR}
+      </if>
+      <if test="expectvalue != null" >
+        and expectValue = #{expectvalue,jdbcType=VARCHAR}
+      </if>
+      <if test="starttime != null" >
+        and startTime = #{starttime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="endtime != null" >
+        and endTime = #{endtime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="createdate != null" >
+        and createdate = #{createdate,jdbcType=TIMESTAMP}
+      </if>
+      <if test="updateuser != null" >
+        and updateUser = #{updateuser,jdbcType=VARCHAR}
+      </if>
+      <if test="updatedate != null" >
+        and updatedate = #{updatedate,jdbcType=TIMESTAMP}
+      </if>
+      <if test="deldate != null" >
+        and deldate = #{deldate,jdbcType=TIMESTAMP}
+      </if>
+      <if test="delflag != null" >
+        and delFlag = #{delflag,jdbcType=INTEGER}
+      </if>
+    </where>
+  </select>
+
+
+</mapper>

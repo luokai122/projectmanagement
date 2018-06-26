@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.toprs.projectmanagenment.mapper.security.RoleDao">
+    <insert id="insertRole" parameterType="cn.toprs.projectmanagenment.entity.SysRole">
+      insert into Sys_role_User
+      (sys_user_id,sys_role_id
+      )values(
+      #{sysUserId}, #{sysRoleId}
+      )
+    </insert>
+
+    <update id="updateRole" parameterType="cn.toprs.projectmanagenment.entity.SysRole">
+        update Sys_role_User
+          set sys_role_id = #{sysRoleId}
+          where sys_user_id = #{sysUserId}
+    </update>
+</mapper>

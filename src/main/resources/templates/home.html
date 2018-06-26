@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+<meta content="text/html;charset=UTF-8"/>
+<title sec:authentication="name"></title>
+    <script src="/static/js/jquery-3.3.1.min.js"></script>
+<style type="text/css">
+    .bg{
+        background-image: url(/static/img/admin_bg.png);
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        background-size: 100% 100%;
+        -moz-background-size: 100% 100%;
+    }
+    .admin_btn{
+        float: left;
+        height: 8%;
+        width: 40%;
+        background-color: rgba(4,160,255,0.6);
+        border-radius: 15px;
+        margin-top: 18%;
+        margin-left: 6%;
+        margin-right: 2%;
+    }
+    .admin_btn img{
+        width: 15%;
+        margin-left: 15%;
+        margin-top: 10%;
+    }
+    .admin_btn span{
+        font-size: 38px;
+        color: #ffffff;
+        position: fixed;
+        margin-left: 5%;
+        margin-top: 4.5%;
+    }
+</style>
+    <script th:inline="javascript">
+        $(function () {
+            var isAdmin = [[${#authorization.expression('hasRole(''ROLE_ADMIN'')')}]];
+            if(!isAdmin){
+                window.location.href="/index"
+            }
+        })
+        function hrefadmin(){
+            window.location.href='/admin';
+        }
+        function hrefhome() {
+            window.location.href='/index';
+        }
+    </script>
+</head>
+<body>
+    <div class="bg">
+        <div class="admin_btn" onclick="hrefadmin()">
+            <img src="/static/img/icon_usermanager.png">
+            <span>用户管理</span>
+        </div>
+        <div class="admin_btn" onclick="hrefhome()">
+            <img src="/static/img/icon_function.png">
+            <span>业务查看</span>
+        </div>
+    </div>
+    
+	
+</body>
+</html>

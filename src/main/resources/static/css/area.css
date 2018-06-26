@@ -1,0 +1,391 @@
+﻿* {
+	padding: 0px;
+	margin: 0px;
+}
+
+
+/*顶部title栏 start*/
+
+.title {
+	position: absolute;
+	top: 5px;
+	left: 8.8%;
+	width: 82.4%;
+	height: 59px;
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+	background-image: url(/static/img/area/search_bg.png);
+	-moz-background-size: 100% 100%;
+	z-index: 999;
+	display: flex;
+}
+
+.title img {
+	width: 100%;
+}
+
+.title .title_search {
+	width: 16.3%;
+	display: flex;
+	justify-content: center;
+	float: left;
+	align-items: center;
+}
+
+.title_search .search_img {
+	/*margin: 0px 0px 0px 0px;*/
+	padding: 0px 10px 0 12px;
+	display: flex;
+	float: left;
+	align-items: center;
+}
+
+.search_img img {
+	margin: 0px 0px 0px 0px;
+	width: 14px;
+	height: auto;
+}
+
+.title .search_icon {
+	margin: 0px 0px 0px 0px;
+	display: flex;
+	justify-content: center;
+	float: left;
+	align-items: center;
+}
+
+.search_icon img {
+	height: 23px;
+}
+
+.title .more {
+	width: calc(100% - 27.8%);
+	display: flex;
+	justify-content: center;
+	float: left;
+	align-items: center;
+}
+
+.title .more .more_text {
+	margin: 0px 0px 0px 0px;
+	display: flex;
+	justify-content: center;
+	float: left;
+	align-items: center;
+	font-size: 14px;
+	font-family: "微软雅黑";
+	color: #CCCCCC;
+}
+
+.title .lists {
+	width: 11.5%;
+	display: flex;
+	/*justify-content: center;*/
+	float: left;
+	align-items: center;
+	font-family: "微软雅黑";
+	color: #CCCCCC;
+}
+
+.title .lists img {
+	width: auto;
+	height: 16px;
+}
+/*顶部title栏 end*/
+
+/*弹出窗start*/
+.popupwindow {
+	height: 56px;
+	width: 155px;
+	background-repeat: no-repeat;
+	background-size: 100% auto;
+	background-image: url(/static/img/area/projectwindow_bg.png);
+	/*border-radius: 2em 1em 4em / 0.5em 3em;*/
+}
+
+.toppopup {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	float: left;
+	align-items: center;
+}
+
+.toppopup-img {
+	width: 40%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	float: left;
+	align-items: center;
+	padding: 7px 11px 5px 7px;
+}
+
+.toppopup-img img {
+	width: 100%;
+	height: 100%;
+}
+
+.toppopup-text {
+	width: 68%;
+	height: 100%;
+	display: flex;
+	float: left;
+	align-items: center;
+}
+
+.toppopup-text .toppopup-text-text {
+	font-size: 12px;
+	width: 80%;
+	font-family: '微软雅黑';
+	color: #333333;
+	font-weight: bold;
+	display: flex;
+	float: left;
+	justify-content: center;
+}
+
+.toppopup-text .toppopup-text-img {
+	width: 20%;
+	display: flex;
+	float: left;
+	align-items: center;
+}
+
+.toppopup-text-img img {
+	height: 11px;
+	width: 6px;
+}
+
+.popupwindow .line {
+	width: 90%;
+	height: 1px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background: #AAAAAA;
+	margin: 0 5% 0 5%;
+	;
+}
+
+.bottompopup {
+	width: 100%;
+	height: 45%;
+	display: flex;
+	justify-content: center;
+	float: left;
+	align-items: center;
+}
+
+.bottompopup .bottompopup-halfarea {
+	width: 50%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	float: left;
+	align-items: center;
+}
+
+.bottompopup-halfarea-button {
+	width: 50px;
+	height: 16px;
+	background-repeat: no-repeat;
+	background-size: 100% auto;
+	background-image: url(../img/main/voice_bg.png);
+	display: flex;
+	justify-content: center;
+}
+
+.bottompopup-halfarea-button-img {
+	display: flex;
+	justify-content: center;
+	float: left;
+	align-items: center;
+}
+
+.bottompopup-halfarea-button-img img {
+	width: 7.5px;
+	height: 10px;
+}
+
+.bottompopup-halfarea-button-text {
+	/*width: 50%;*/
+	margin-left: 7px;
+	display: flex;
+	justify-content: center;
+	float: left;
+	align-items: center;
+	font-size: 8px;
+	color: #000000;
+	font-family: '微软雅黑';
+}
+/*弹出窗end*/
+
+
+/*地图放大缩小 开始*/
+
+.zoomUpdown {
+	position: absolute;
+	bottom: 25px;
+	right: 6px;
+	z-index: 999;
+	width: 56px;
+	height: 112px;
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+	background-image: url(/static/img/zoom_bg.png);
+}
+
+.zoomUpdown .zoomUp {
+	height: 56px;
+	width: 100%;
+	text-align: center;
+	padding-top: calc((100% - 20px) / 2);
+}
+
+.zoomUpdown .linediv {
+	width: 100%;
+	height: 1px;
+	text-align: center;
+}
+
+.zoomUpdown .linediv .line {
+	width: 70%;
+	height: 100%;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+	background-image: url(/static/img/line.png);
+}
+
+.zoomUpdown .zoomDown {
+	height: 50%;
+	text-align: center;
+	padding-top: calc((100% - 6px) / 2);
+}
+/*地图放大缩小 结束*/
+
+
+/*map其他组件*/
+
+#mapbox .viewbox {
+	height: 100%;
+	width: 100%;
+	position: relative;
+}
+
+.viewbox #mapview {
+	height: 100%;
+	width: 100%;
+}
+
+.viewbox .download {
+	position: absolute;
+	top: 30px;
+	left: 12px;
+	z-index: 999;
+}
+
+.viewbox .location {
+	position: absolute;
+	bottom: 25px;
+	left: 6px;
+	z-index: 999;
+}
+
+.location img {
+	height: 56px;
+	width: 56px;
+}
+
+.lightbox {
+	width: 300px;
+	background: #FFFFFF;
+	border: 5px solid #ccc;
+	line-height: 20px;
+	display: none;
+	margin: 0;
+}
+
+.lightbox dt {
+	background: #f4f4f4;
+	padding: 5px;
+}
+
+.lightbox dd {
+	padding: 20px;
+	margin: 0;
+}
+
+#mapbox .contents {
+	width: 100%;
+	height: 95px;
+	position: absolute;
+	bottom: 0;
+	z-index: 999;
+	background-color: #FFFFFF;
+	padding-top: 18px;
+	padding-left: 27px;
+}
+
+.item {
+	height: 57px;
+	width: auto;
+	display: block;
+	float: left;
+}
+
+.item .content {
+	float: left;
+}
+
+.item .content .circle {
+	height: 32px;
+	width: 32px;
+	border-radius: 16px;
+	background-color: #007AFF;
+	margin: auto;
+}
+
+.item .content .circle .number {
+	height: 32px;
+	width: 32px;
+	line-height: 32px;
+	text-align: center;
+	color: #FFFFFF;
+}
+
+.item .content .name {
+	padding-top: 12px;
+	height: 25px;
+	width: 40px;
+	text-align: center;
+	font-size: 13px;
+	color: #333333;
+}
+
+.item .btm_line {
+	float: left;
+	height: 2px;
+	margin-top: 16px;
+	margin-left: 7px;
+	margin-right: 7px;
+}
+
+.item.active .content .circle {
+	background-color: #FF3B30;
+}
+
+.leaflet-popup .leaflet-popup-content-wrapper {
+	padding: 0px;
+	margin: 0px;
+	box-shadow: none;
+	border-radius: 0;
+}
+
+.leaflet-popup .leaflet-popup-content-wrapper .leaflet-popup-content {
+	padding: 0px;
+	margin: 0px;
+	width: auto;
+}

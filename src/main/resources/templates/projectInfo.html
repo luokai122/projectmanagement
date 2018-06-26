@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>项目详细</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<!--标准mui.css-->
+		<link rel="stylesheet" href="/static/css/mui.min.css">
+		<!--App自定义的css-->
+		<!--<link rel="stylesheet" type="text/css" href="../css/app.css" />-->
+		<style type="text/css">
+			.a-upload {
+				float: left;
+				padding: 2px 10px;
+				height: 30px;
+				line-height: 30px;
+				position: relative;
+				cursor: pointer;
+				color: white;
+				width: 174px;
+				/*background: #00b7ee;*/
+				background: #0099FF;
+				border: 1px solid #ddd;
+				border-radius: 4px;
+				overflow: hidden;
+				display: inline-block;
+				*display: inline;
+				/*margin: 10px;*/
+				/*text-align:center;*/
+				*zoom: 1;
+				text-decoration: none;
+			}
+			
+			.a-upload input {
+				width: 174px;
+				position: absolute;
+				font-size: 100px;
+				right: 0;
+				top: 0;
+				opacity: 0;
+				filter: alpha(opacity=0);
+				cursor: pointer;
+				color: #0099FF;
+			}
+			
+			.a-upload:hover {
+				
+				color: white;
+				/*background: #00b7ee;*/
+				/*border-color: #ccc;*/
+				text-decoration: none
+			}
+			
+			.textlabel {
+				/*display: none;*/
+				/*position: absolute;*/
+				/*background-color: #f9f9f9;*/
+				/*width: 375px;*/
+				/*z-index: 101;*/
+				/*min-width: 160px;*/
+				/*box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);*/
+				/*padding: 12px 16px;*/
+			}
+			
+			.textlabel label {
+				float: right;
+			}
+			
+			.line {
+				display: inline-block;
+				height: 1px;
+				width: 100%;
+				background: #cccccc;
+				overflow: hidden;
+				vertical-align: middle;
+			}
+		</style>
+	</head>
+
+	<body>
+		<!--<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">项目详情</h1>
+		</header>-->
+
+		<script type="text/javascript" src="/static/js/plug-in/jq/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="/static/js/common.js"></script>
+		<script type="text/javascript" src="/static/js/detail.js"></script>
+		<div class="mui-content">
+			<!--<div class="mui-card">
+				<div class="mui-card-content">
+					<div class="mui-card-content-inner">
+						<div id="" style="text-align:center;">
+							项目详情
+						</div>	
+					</div>
+				</div>
+			</div>-->
+			<div class="mui-card">
+				<div class="mui-card-header">项目简介 	
+				<button type="button" style="width:100px;height:30px;background-color: #0099FF;color: #FFFFFF" id="edit_submit">项目编辑</button>	
+			</div>
+				<div class="mui-card-content">
+					<div class="mui-card-content-inner">
+						<div  class="textlabel">
+							项目编号：<label id="projectid" style="float:right;">dgg</label>
+						</div>
+						<div class="line"></div>
+						<div  class="textlabel">
+							项目名称：<label id="projectname" style="float:right;">dgg</label>
+						</div>
+						<div class="line"></div>
+						<div  class="textlabel">
+							负责人：<label id="responsiblerenName" style="float:right;">dgg</label>
+						</div>
+						<div >
+							负责人电话：<label id="responsiblerenTell" style="float:right;">dgg</label>
+						</div>
+						<div class="line"></div>
+						<div >
+							联络人：<label id="contactrenName" style="float:right;">dgg</label>
+						</div>
+						<div >
+							联络人电话：<label id="contactrenTell" style="float:right;">dgg</label>
+						</div>
+						<div class="line"></div>
+						<div >
+							项目状态：<label id="projectstatus" style="float:right;">dgg</label>
+						</div>
+						<div class="line"></div>
+						<div >
+							牵头部门：<label id="department" style="float:right;">dgg</label>
+						</div>
+						<div class="line"></div>
+						<div >
+							项目内容：<label id="projectinfo">
+								这里显示文章摘要，让读者对文章内容有个粗略的概念...
+								这里显示文章摘要，让读者对文章内容有个粗略的概念...
+								这里显示文章摘要，让读者对文章内容有个粗略的概念...
+								这里显示文章摘要，让读者对文章内容有个粗略的概念...
+								这里显示文章摘要，让读者对文章内容有个粗略的概念...</label>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="mui-card">
+				<div class="mui-card-header">项目建设</div>
+				<div class="mui-card-content">
+					<div class="mui-card-content-inner">
+						<div>
+							投资方：<label id="investor" style="float:right;">dgg</label>
+						</div>
+						<div class="line"></div>
+						<div>
+							建设单位：<label id="struct" style="float:right;">dgg</label>
+						</div>
+						<div class="line"></div>
+						<div >
+							签约时间：<label id="signtime" style="float:right;">dgg</label>
+						</div>
+						<div class="line"></div>
+						<div>
+							开工时间：<label id="starttime" style="float:right;">dgg</label>
+						</div>
+						<div class="line"></div>
+						<div >
+							竣工时间：<label id="endtime" style="float:right;">dgg</label>
+						</div>
+						<div class="line"></div>
+						<div>
+							总投资：<label id="amountinvested" style="float:right;">dgg</label>
+						</div>
+						<div class="line"></div>
+						<div >
+							预计产值：<label id="expectvalue" style="float:right;">dgg</label>
+						</div>
+						<div class="line"></div>
+						<div >
+							预期利税：<label id="expecttax" style="float:right;">dgg</label>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="mui-card">
+				<div class="mui-card-header">项目建设</div>
+				<div class="mui-card-content">
+					<div class="mui-card-content-inner">
+						<div >
+							归属区域：<label id="belongarea" style="float:right;">dgg</label>
+						</div>
+						<div class="line"></div>
+						<div>
+							地址：<label id="address" style="float:right;">dgg</label>
+						</div>
+						<div class="line"></div>
+						<div>
+							项目地块：<label id="areaid" style="float:right;">dgg</label>
+						</div>
+						<div class="line"></div>
+						<div>
+							用地面积：<label id="area" style="float:right;">dgg</label>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="mui-card">
+				<div class="mui-card-content">
+					<div class="mui-card-content-inner">
+						<div id="mapview" style="height: 287px;">
+							<img style="width: 100%;" src="/static/img/detail/20180621142129.png"/>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="mui-card">
+				<div class="mui-card-header">
+					<div>
+						
+					</div>
+					<div style="text-align:center;">
+					<a href="javascript:;" class="a-upload">
+						<form id="uploadForm" enctype="multipart/form-data">  
+						    <!--文件:<input type="file" name="file" multiple="multiple"/><br>-->  
+						    <input type="file" name="file" id="doc" multiple="multiple" onchange="javascript:setImagePreviews();" accept="image/*" />
+							<img style="height:18px;padding-right: 15px;padding-top: 2px;" src="/static/img/detail/icon_camera.png"/>
+							<label>上传照片</label> 
+						</form>  
+					</a>						
+					</div>
+					<div>
+					</div>
+				</div>
+				<div class="mui-card-content">
+					<div class="mui-card-content-inner">
+						<div>
+							<textarea id="selectInput" placeholder="请输入项目工程最新进展" style="
+										margin-bottom: 0px;
+										padding: 0px 0px; 
+										background:none;
+										border: none;
+										height: auto;
+										font-size: 14px;
+										font-family: ' 微软雅黑 ';
+										color: #333333;"></textarea>
+						</div>
+						<!--<div class="line"></div>-->
+
+						<div id="dd" style=" display: flex;flex-wrap:wrap;"></div>
+
+					</div>
+				</div>
+
+				<div class="mui-card-footer">
+					<div>
+						
+					</div>
+					<button type="button" style="width:100px;height:30px;background-color: #0099FF;color: #FFFFFF" id="update_submit">更新进度</button>
+					<div>
+						
+					</div>
+				</div>
+			</div>
+			
+			<div id="" style="margin-left: 10px;">
+				工程进度
+			</div>
+			<div id="pjRecord">
+				
+			</div>
+			<!--<div class="mui-card">
+				<div class="mui-card-header">
+					Seq :<label id="">1</label> 日期 ：<label id="">2018-05-15</label>
+					<button type="button" style="background-color: #0099FF;color: #FFFFFF">删除记录</button>
+				</div>
+				<div class="mui-card-content">
+					<div class="mui-card-content-inner">
+						<div id="">
+							<label id="progressinfo">dgg</label>
+						</div>
+						<div class="line"></div>
+						<div id="" style="display: flex;flex-wrap:wrap;">
+							<li style="list-style-type:none;width: 50%;
+									height: auto;padding-left: 4px;padding-right: 4px;
+									">
+								<img style="width: 100%;" src="img/detail/flypig.jpg" />
+							</li>
+							<li style="list-style-type:none;width: 50%;
+									height: auto;padding-left: 4px;padding-right: 4px;
+									">
+								<img style="width: 100%;" src="img/detail/flypig.jpg" />
+							</li>
+							<li style="list-style-type:none;width: 50%;
+									height: auto;padding-left: 4px;padding-right: 4px;
+									">
+								<img style="width: 100%;" src="img/detail/flypig.jpg" />
+							</li>
+							<li style="list-style-type:none;width: 50%;
+									height: auto;padding-left: 4px;padding-right: 4px;
+									">
+								<img style="width: 100%;" src="img/detail/flypig.jpg" />
+							</li>
+						</div>
+					</div>
+				</div>
+			</div>-->
+			
+
+			<!--<div class="mui-card" id="progressId">
+				<div class="mui-card-header">
+					Seq :<label id="">1</label> 日期 ：<label id="">2018-05-15</label>
+					<button type="button" style="background-color: #0099FF;color: #FFFFFF" id="btn_submit">删除记录</button>
+				</div>
+				<div class="mui-card-content">
+					<div class="mui-card-content-inner">
+						<div id="" style="text-indent:30px;">
+							<label id="progressinfo">这里显示文章摘要，让读者对文章内容有个粗略的概念...这里显示文章摘要，让读者对文章内容有个粗略的概念...这里显示文章摘要，让读者对文章内容有个粗略的概念...这里显示文章摘要，让读者对文章内容有个粗略的概念...这里显示文章摘要，让读者对文章内容有个粗略的概念...</label>
+						</div>
+						<div class="line"></div>
+						<div id="" style="display: flex;flex-wrap:wrap;">
+							<li style="list-style-type:none;width: 50%;
+									height: auto;padding-left: 4px;padding-right: 4px;
+									">
+								<img style="width: 100%;" src="img/detail/wind.jpg" />
+							</li>
+							<li style="list-style-type:none;width: 50%;
+									height: auto;padding-left: 4px;padding-right: 4px;
+									">
+								<img style="width: 100%;" src="img/detail/flypig.jpg" />
+							</li>
+							<li style="list-style-type:none;width: 50%;
+									height: auto;padding-left: 4px;padding-right: 4px;
+									">
+								<img style="width: 100%;" src="img/detail/wind.jpg" />
+							</li>
+						</div>
+					</div>
+				</div>
+			</div>-->
+
+			<!--<div class="mui-card">
+				<div class="mui-card-header mui-card-media" style="height:40vw;background-image:url(../images/cbd.jpg)"></div>
+				<div class="mui-card-content">
+					<div class="mui-card-content-inner">
+						<p>Posted on January 18, 2016</p>
+						<p style="color: #333;">这里显示文章摘要，让读者对文章内容有个粗略的概念...</p>
+					</div>
+				</div>
+			</div>-->
+			<div style="padding-top: 25px;"></div>
+		</div>
+		<script src="/static/js/mui.min.js"></script>
+		<script type="text/javascript" src="/static/js/plug-in/leaflet/leaflet-src.js"></script>
+		<script type="text/javascript" src="/static/js/plug-in/leaflet/leaflet.js"></script>
+	</body>
+	<script type="text/javascript">
+		//下面用于多图片上传预览功能
+		function setImagePreviews(avalue) {
+			var docObj = document.getElementById("doc");
+			var dd = document.getElementById("dd");
+			dd.innerHTML = "";
+			var fileList = docObj.files;
+			for(var i = 0; i < fileList.length; i++) {
+				//style='width: 100%;'	
+				dd.innerHTML += "<li style='list-style-type:none;width: 50%;height: auto;padding-left: 4px;padding-right: 4px;'><img style='width: 100%;'id='img" + i + "' /> </li>";
+
+				//dd.innerHTML += "<div style='float: left;margin-top: 10px;' > <img id='img" + i + "'  /> </div>";
+				var imgObjPreview = document.getElementById("img" + i);
+				if(docObj.files && docObj.files[i]) {
+					//火狐下，直接设img属性
+					// imgObjPreview.style.display = 'block';
+//					imgObjPreview.style.width = '160px';
+//					imgObjPreview.style.height = '130px';
+					//          imgObjPreview.style.margin = '5px';
+					imgObjPreview.style.borderRadius = '5px';
+					//imgObjPreview.src = docObj.files[0].getAsDataURL();
+					//火狐7以上版本不能用上面的getAsDataURL()方式获取，需要一下方式
+					imgObjPreview.src = window.URL.createObjectURL(docObj.files[i]);
+				} else {
+					//IE下，使用滤镜
+					docObj.select();
+					var imgSrc = document.selection.createRange().text;
+					var localImagId = document.getElementById("img" + i);
+					//必须设置初始大小
+					// localImagId.style.width = "160px";
+					// localImagId.style.height = "130px";
+					//  imgObjPreview.style.margin = '5px';
+					imgObjPreview.style.borderRadius = '5px';
+					//图片异常的捕捉，防止用户修改后缀来伪造图片
+//					private String [] types={".jpg",".bmp",".jpeg",".png",".gif"};
+					try {
+						localImagId.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale)";
+						localImagId.filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = imgSrc;
+					} catch(e) {
+						alert("您上传的图片格式不正确，请重新选择!");
+						return false;
+					}
+					imgObjPreview.style.display = 'none';
+					document.selection.empty();
+				}
+			}
+			return true;
+		}
+	</script>
+
+</html>

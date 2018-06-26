@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.toprs.projectmanagenment.mapper.ProgressInfoMapper" >
+  <resultMap id="BaseResultMap" type="cn.toprs.projectmanagenment.entity.ProgressInfo" >
+    <id column="progressId" property="progressid" jdbcType="INTEGER" />
+    <result column="projectId" property="projectid" jdbcType="INTEGER" />
+    <result column="progressInfo" property="progressinfo" jdbcType="VARCHAR" />
+    <result column="img" property="img" jdbcType="VARCHAR" />
+    <result column="createdate" property="createdate" jdbcType="TIMESTAMP" />
+    <result column="createUser" property="createuser" jdbcType="VARCHAR" />
+    <result column="delUser" property="deluser" jdbcType="VARCHAR" />
+    <result column="delDate" property="deldate" jdbcType="TIMESTAMP" />
+    <result column="delFlag" property="delflag" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    progressId, projectId, progressInfo, img, createdate, createUser, delUser, delDate, 
+    delFlag
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from progressinfo
+    where projectId = #{projectid,jdbcType=INTEGER} and delFlag = "1"
+    order by progressId desc
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from progressinfo
+    where progressId = #{progressid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.toprs.projectmanagenment.entity.ProgressInfo" >
+    insert into progressinfo (progressId, projectId, progressInfo, 
+      img, createdate, createUser, 
+      delUser, delDate, delFlag
+      )
+    values (#{progressid,jdbcType=INTEGER}, #{projectid,jdbcType=INTEGER}, #{progressinfo,jdbcType=VARCHAR}, 
+      #{img,jdbcType=VARCHAR}, #{createdate,jdbcType=TIMESTAMP}, #{createuser,jdbcType=VARCHAR}, 
+      #{deluser,jdbcType=VARCHAR}, #{deldate,jdbcType=TIMESTAMP}, "1"
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.toprs.projectmanagenment.entity.ProgressInfo" >
+    insert into progressinfo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="progressid != null" >
+        progressId,
+      </if>
+      <if test="projectid != null" >
+        projectId,
+      </if>
+      <if test="progressinfo != null" >
+        progressInfo,
+      </if>
+      <if test="img != null" >
+        img,
+      </if>
+      <if test="createdate != null" >
+        createdate,
+      </if>
+      <if test="createuser != null" >
+        createUser,
+      </if>
+      <if test="deluser != null" >
+        delUser,
+      </if>
+      <if test="deldate != null" >
+        delDate,
+      </if>
+      <if test="delflag != null" >
+        delFlag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="progressid != null" >
+        #{progressid,jdbcType=INTEGER},
+      </if>
+      <if test="projectid != null" >
+        #{projectid,jdbcType=INTEGER},
+      </if>
+      <if test="progressinfo != null" >
+        #{progressinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="img != null" >
+        #{img,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null" >
+        #{createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createuser != null" >
+        #{createuser,jdbcType=VARCHAR},
+      </if>
+      <if test="deluser != null" >
+        #{deluser,jdbcType=VARCHAR},
+      </if>
+      <if test="deldate != null" >
+        #{deldate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="delflag != null" >
+        #{delflag,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.toprs.projectmanagenment.entity.ProgressInfo" >
+    update progressinfo
+    <set >
+      <if test="projectid != null" >
+        projectId = #{projectid,jdbcType=INTEGER},
+      </if>
+      <if test="progressinfo != null" >
+        progressInfo = #{progressinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="img != null" >
+        img = #{img,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null" >
+        createdate = #{createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createuser != null" >
+        createUser = #{createuser,jdbcType=VARCHAR},
+      </if>
+      <if test="deluser != null" >
+        delUser = #{deluser,jdbcType=VARCHAR},
+      </if>
+      <if test="deldate != null" >
+        delDate = #{deldate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="delflag != null" >
+        delFlag = #{delflag,jdbcType=INTEGER},
+      </if>
+    </set>
+    where progressId = #{progressid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.toprs.projectmanagenment.entity.ProgressInfo" >
+    update progressinfo
+    set projectId = #{projectid,jdbcType=INTEGER},
+      progressInfo = #{progressinfo,jdbcType=VARCHAR},
+      img = #{img,jdbcType=VARCHAR},
+      createdate = #{createdate,jdbcType=TIMESTAMP},
+      createUser = #{createuser,jdbcType=VARCHAR},
+      delUser = #{deluser,jdbcType=VARCHAR},
+      delDate = #{deldate,jdbcType=TIMESTAMP},
+      delFlag = #{delflag,jdbcType=INTEGER}
+    where progressId = #{progressid,jdbcType=INTEGER}
+  </update>
+
+  <update id="deleteProgress" parameterType="cn.toprs.projectmanagenment.entity.ProgressInfo" >
+    update progressinfo
+    set
+      delUser = #{deluser,jdbcType=VARCHAR},
+      delDate = #{deldate,jdbcType=TIMESTAMP},
+      delFlag = #{delflag,jdbcType=INTEGER}
+    where progressId = #{progressid,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from progressinfo
+    where progressId = #{id,jdbcType=INTEGER}
+  </select>
+</mapper>
